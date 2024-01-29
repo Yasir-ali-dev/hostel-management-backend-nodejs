@@ -2,14 +2,17 @@ require("dotenv").config();
 require("express-async-errors");
 const adminRouter = require("./routes/admin-route");
 const extraExpensesRouter = require("./routes/extra-expenses");
-
+const messExpensesRouter = require("./routes/mess-expenses-route");
 const express = require("express");
 const app = express();
 const connectDb = require("./db/connect_db");
 const errorHandler = require("./middlewares/error_handler");
+
+// middlewares
 app.use(express.json());
 app.use("/auth", adminRouter);
 app.use("/extra_expenses", extraExpensesRouter);
+app.use("/mess_expenses", messExpensesRouter);
 
 app.use(errorHandler);
 
