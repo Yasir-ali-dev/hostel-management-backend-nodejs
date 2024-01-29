@@ -26,6 +26,7 @@ const errorHandler = (err, req, res, next) => {
       .map((er) => er.message)
       .join(", ");
   }
+  console.log("in error handler");
 
   res.status(customError.statusCode).json({ message: customError.message });
 };

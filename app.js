@@ -8,8 +8,8 @@ const app = express();
 const connectDb = require("./db/connect_db");
 const errorHandler = require("./middlewares/error_handler");
 app.use(express.json());
-app.use("/api", adminRouter);
-app.use("/", extraExpensesRouter);
+app.use("/auth", adminRouter);
+app.use("/extra_expenses", extraExpensesRouter);
 
 app.use(errorHandler);
 

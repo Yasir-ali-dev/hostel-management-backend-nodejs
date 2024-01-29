@@ -9,13 +9,10 @@ const {
 
 const router = express.Router();
 
-router
-  .route("/extra_expenses")
-  .get(getAllExtraExpenses)
-  .post(createExtraExpense);
+router.route("/").get(getAllExtraExpenses).post(createExtraExpense);
 
 router
-  .route("/extra_expenses/:extra_expense_Id")
+  .route("/:extra_expense_Id")
   .get(getExtraExpense)
   .patch(updateExtraExpense)
   .delete(deleteExtraExpense);
