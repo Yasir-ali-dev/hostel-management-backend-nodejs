@@ -15,9 +15,7 @@ const helmet = require("helmet");
 
 // middlewares
 app.use(express.json());
-app.use(
-  cors({ origin: "https://hostel-management-backend-nodejs.vercel.app/" })
-);
+app.use(cors({ origin: "http://localhost:3001/" }));
 app.use(helmet());
 // routes
 app.get("/", (req, res) => {
