@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const HostelPayment = require("../models/HostelPayment");
 const { BadRequestError, NotFoundError } = require("../errors");
+const Student = require("../models/Student");
 
 const getAllHostelPayments = async (req, res, next) => {
   const hostelPayment = await HostelPayment.find({});
@@ -10,19 +11,28 @@ const getAllHostelPayments = async (req, res, next) => {
 };
 
 const createHostelPayment = async (req, res, next) => {
-  const { total, paid, remaining, startdate } = req.body;
+  const { total, paid, remaining, startdate, student_id } = req.body;
 
-  if (!total || !paid || !remaining || !startdate) {
+  if (!total || !paid || !startdate) {
     throw new BadRequestError(
       "please provide required fields total, paid, remaining or date"
     );
   }
+
+  const student = await Student.findById(student_id);
   const createdPayment = await HostelPayment.create({
     total,
     paid,
     remaining,
     startdate,
   });
+  console.log(student.hostel_payments);
+  try {
+    student.hostel_payments.push(createdPayment);
+  } catch (error) {
+    throw new Error(error);
+  }
+  await student.save();
 
   res
     .status(StatusCodes.CREATED)

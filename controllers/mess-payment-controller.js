@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const MessPayment = require("../models/MessPayment");
 const { BadRequestError, NotFoundError } = require("../errors");
+const Student = require("../models/Student");
 
 const getAllMessPayments = async (req, res, next) => {
   const messPayment = await MessPayment.find({});
@@ -8,19 +9,28 @@ const getAllMessPayments = async (req, res, next) => {
 };
 
 const createMessPayment = async (req, res, next) => {
-  const { total, paid, remaining, startdate } = req.body;
+  const { total, paid, remaining, startdate, student_id } = req.body;
 
-  if (!total || !paid || !remaining || !startdate) {
+  if (!total || !paid || !startdate) {
     throw new BadRequestError(
       "please provide required fields total, paid, remaining or date"
     );
   }
+
   const createdPayment = await MessPayment.create({
     total,
     paid,
     remaining,
     startdate,
   });
+
+  const student = await Student.findById(student_id);
+  try {
+    student.mess_payments.push(createdPayment);
+  } catch (error) {
+    throw new Error(error);
+  }
+  await student.save();
 
   res
     .status(StatusCodes.CREATED)

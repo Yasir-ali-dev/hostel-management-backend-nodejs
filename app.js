@@ -9,6 +9,7 @@ const connectDb = require("./db/connect_db");
 const errorHandler = require("./middlewares/error_handler");
 const messPaymentRouter = require("./routes/mess-payment-route");
 const hostelPaymentRouter = require("./routes/hostel-payment-route");
+const studentRouter = require("./routes/student-route");
 
 // middlewares
 app.use(express.json());
@@ -17,6 +18,8 @@ app.use("/extra_expenses", extraExpensesRouter);
 app.use("/mess_expenses", messExpensesRouter);
 app.use("/mess_payment", messPaymentRouter);
 app.use("/hostel_payment", hostelPaymentRouter);
+app.use("/students", studentRouter);
+
 // error-handler middleware
 app.use(errorHandler);
 
