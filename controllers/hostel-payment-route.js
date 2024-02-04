@@ -57,6 +57,7 @@ const updateHostelPayment = async (req, res) => {
     req.body,
     { new: true }
   );
+
   if (!updated_hostel_payment) {
     throw new NotFoundError("mess payment not found with id: ", payment_id);
   }

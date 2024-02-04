@@ -13,6 +13,9 @@ const studentRouter = require("./routes/student-route");
 
 // middlewares
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.json({ title: "Hostel Management" });
+});
 app.use("/auth", adminRouter);
 app.use("/extra_expenses", extraExpensesRouter);
 app.use("/mess_expenses", messExpensesRouter);
