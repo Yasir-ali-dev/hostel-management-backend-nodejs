@@ -10,9 +10,16 @@ const errorHandler = require("./middlewares/error_handler");
 const messPaymentRouter = require("./routes/mess-payment-route");
 const hostelPaymentRouter = require("./routes/hostel-payment-route");
 const studentRouter = require("./routes/student-route");
+const cors = require("cors");
+const helmet = require("helmet");
 
 // middlewares
 app.use(express.json());
+app.use(
+  cors({ origin: "https://hostel-management-backend-nodejs.vercel.app/" })
+);
+app.use(helmet());
+// routes
 app.get("/", (req, res) => {
   res.json({ title: "Hostel Management" });
 });
