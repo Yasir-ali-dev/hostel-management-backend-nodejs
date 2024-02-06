@@ -12,7 +12,6 @@ const hostelPaymentRouter = require("./routes/hostel-payment-route");
 const studentRouter = require("./routes/student-route");
 const cors = require("cors");
 const helmet = require("helmet");
-const authentication = require("./middlewares/authentication");
 
 // middlewares
 app.use(express.json());
