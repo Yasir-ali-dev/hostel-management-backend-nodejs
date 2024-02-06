@@ -13,7 +13,7 @@ const studentRouter = require("./routes/student-route");
 const cors = require("cors");
 const helmet = require("helmet");
 
-// middlewares
+// middlewares sds
 app.use(express.json());
 app.use(cors());
 

@@ -3,7 +3,7 @@
     "api/*": {
       "runtime": "nodejs14.x",
       "memory": 512, 
-            "maxDuration": 10, 
+       "maxDuration": 10, 
       "timeout": 30 
     }
   },
@@ -20,5 +20,6 @@
         "dest": "/index.js"
       }
     ]
+    
 }
   
