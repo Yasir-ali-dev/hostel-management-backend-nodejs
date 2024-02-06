@@ -7,19 +7,11 @@ const getAllStudents = async (req, res, next) => {
   res.status(StatusCodes.OK).json({ status: true, all_students: allStudents });
 };
 
-const createStudent = async (req, res, next) => {
-  const { name, father_name, cnic, phone, student_id, floor, room } = req.body;
-  if (
-    !name ||
-    !father_name ||
-    !cnic ||
-    !phone ||
-    !student_id ||
-    !floor ||
-    !room
-  ) {
+const createStudent = async (req, res) => {
+  const { name, cnic, father_name, phone, student_id, floor, room } = req.body;
+  if (!name || !father_name || !phone || !student_id || !floor || !room) {
     throw new BadRequestError(
-      "please provide name, father_name, cnic, phone, student_id, floor or room are required!"
+      "please provide name, father_name, phone, student_id, floor or room are required!"
     );
   }
   const newStudent = await Student.create({

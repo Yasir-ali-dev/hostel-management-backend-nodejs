@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Auth = require("../models/Admin");
 const { StatusCodes } = require("http-status-codes");
-const { BadRequestError, UnAuthorisedError } = require("../errors");
+const { BadRequestError, UnAuthorizedError } = require("../errors");
 require("dotenv").config();
 
 const signUp = async (req, res) => {
@@ -36,12 +36,12 @@ const login = async (req, res) => {
   }
   const user = await Auth.findOne({ email });
   if (!user) {
-    throw new UnAuthorisedError(`Invalid credentials`);
+    throw new UnAuthorizedError(`Invalid credentials`);
   }
   const isPasswordCorrect = await bcrypt.compareSync(password, user.password);
 
   if (!isPasswordCorrect) {
-    throw new UnAuthorisedError(`Invalid credentials`);
+    throw new UnAuthorizedError(`Invalid credentials`);
   }
 
   res

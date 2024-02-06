@@ -14,9 +14,6 @@ const studentSchema = mongoose.Schema({
   },
   cnic: {
     type: String,
-    minLength: [13, "Enter Fullname is required"],
-    maxLength: [13, "Enter Fullname is required"],
-    unique: true,
   },
   phone: {
     type: String,

@@ -1,11 +1,11 @@
-const { UnAuthorisedError } = require("../errors");
+const { UnAuthorizedError } = require("../errors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const authentication = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    throw new UnAuthorisedError("Authentication Failed");
+    throw new UnAuthorizedError("Authentication Failed");
   }
   const token = authHeader.split(" ")[1];
   try {
@@ -13,7 +13,7 @@ const authentication = async (req, res, next) => {
     req.user = { email: payload.email, password: payload.password };
     next();
   } catch (error) {
-    throw new UnAuthorisedError("Authentication Failed");
+    throw new UnAuthorizedError("Authentication Failed");
   }
 };
 module.exports = authentication;
