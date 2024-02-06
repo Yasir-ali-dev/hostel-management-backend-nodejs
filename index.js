@@ -32,7 +32,7 @@ app.use("/students", studentRouter);
 // error-handler middleware
 app.use(errorHandler);
 
-const port = process.env.PORT;
+const port = 4000;
 app.listen(port, async () => {
   try {
     await connectDb(process.env.MONGO_URI);
